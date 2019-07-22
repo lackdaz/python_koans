@@ -33,9 +33,35 @@ from runner.koan import *
 #
 # Your goal is to write the score method.
 
+def gen_score_dict(dice):
+    score_dict = {}
+    for roll in dice:
+        key = str(roll)
+        if score_dict.has_key(key):
+            score_dict[key] += 1
+        else:
+            score_dict.update({key: 1})
+    return score_dict
+
+
 def score(dice):
     # You need to write this method
-    pass
+    score_dict = gen_score_dict(dice)
+    score = 0
+    for key, value in score_dict.iteritems():
+        if value >= 3:
+            if (key is '1'):
+                score += (value / 3) * 1000 + (value % 3) * 100
+            elif (key is '5'):
+                score += (value / 3) * 100 * 5 + (value % 3) * 50
+            else:
+                score += (value / 3) * 100 * int(key)
+        else:
+            if (key is '1'):
+                score += 100 * value
+            if (key is '5'):
+                score += 50 * value
+    return score
 
 
 class AboutScoringProject(Koan):

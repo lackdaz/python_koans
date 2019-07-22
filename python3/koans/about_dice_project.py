@@ -10,14 +10,19 @@ class DiceSet:
         self._values = None
 
     @property
-    def values(self):
+    def values(self) -> list():
         return self._values
 
-    def roll(self, n):
+    def roll(self, n: int) -> None:
         # Needs implementing!
         # Tip: random.randint(min, max) can be used to generate random numbers
-        pass
-
+        result = list()
+        i = 0
+        while i < n:
+          result.append(random.randint(1, 6))
+          i += 1
+        self._values = result
+        
 class AboutDiceProject(Koan):
     def test_can_create_a_dice_set(self):
         dice = DiceSet()

@@ -17,7 +17,7 @@ class AboutClassAttributes(Koan):
         # phased out in Python 3.
 
         fido = self.Dog()
-        self.assertEqual(__, isinstance(fido, object))
+        self.assertEqual(True, isinstance(fido, object))
 
     def test_classes_are_types(self):
         self.assertEqual(__, self.Dog.__class__ == type)

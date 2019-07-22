@@ -17,9 +17,31 @@
 # and
 #   about_triangle_project_2.py
 #
+from IPython import embed
+
+from math import fsum
+
+
+def check_side_lengths(side, sides):
+    remaining_sides = list(sides)
+    remaining_sides.remove(side)
+    return side > fsum(remaining_sides)
+
+
 def triangle(a, b, c):
-    # DELETE 'PASS' AND WRITE THIS CODE
-    pass
+    sides = (a, b, c)
+    if any(side <= 0 for side in sides):
+        raise TriangleError("negative side")
+    elif any(check_side_lengths(side, sides) for side in sides):
+        raise TriangleError("weird side")
+    else:
+        unique_sides = len(set(sides))
+        if unique_sides == 3:
+            return 'scalene'
+        elif unique_sides == 2:
+            return 'isosceles'
+        else:
+            return 'equilateral'
 
 
 # Error class used in part 2.  No need to change this code.

@@ -32,9 +32,38 @@ from runner.koan import *
 #
 # Your goal is to write the score method.
 
+from math import floor
+
 def score(dice):
-    # You need to write this method
-    pass
+    def equals(target):
+      return lambda n: n == target
+
+    is_five = equals(5)
+    is_one = equals(1)
+    is_two = equals(2)
+    is_three = equals(3)
+    is_four = equals(4)
+    is_six = equals(6)
+
+    number_of_ones = len(list(filter(is_one, dice)))
+    number_of_fives = len(list(filter(is_five, dice)))
+    number_of_twos = len(list(filter(is_two, dice)))
+    number_of_threes = len(list(filter(is_three, dice)))
+    number_of_fours = len(list(filter(is_four, dice)))
+    number_of_sixes = len(list(filter(is_six, dice)))
+
+    subtotals = [
+      floor(number_of_ones/3) * 1000 + number_of_ones % 3 * 100,
+      floor(number_of_fives/3) * 100 * 5 + number_of_fives % 3 * 50,
+      floor(number_of_fours/3) * 100 * 4,
+      floor(number_of_threes/3) * 100 * 3,
+      floor(number_of_twos/3) * 100 * 2,
+      floor(number_of_sixes/3) * 100 * 6,
+    ]
+
+    return sum(subtotals)
+
+
 
 class AboutScoringProject(Koan):
     def test_score_of_an_empty_list_is_zero(self):
